@@ -1,0 +1,27 @@
+{
+  "name": "task_app",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/pretender-2905/NEW-NODE-JS-TWO#readme",
+  "bugs": {
+    "url": "https://github.com/pretender-2905/NEW-NODE-JS-TWO/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pretender-2905/NEW-NODE-JS-TWO.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "morgan": "^1.10.1",
+    "nodemon": "^3.1.10"
+  }
+}
