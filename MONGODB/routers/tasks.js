@@ -2,6 +2,7 @@ import express from 'express'
 import sendResponse from '../helpers/sendResponse.js'
 import Task from '../models/Task.js'
 import mongoose from 'mongoose'
+import moongoose from 'moongoose'
 
 
 const router = express.Router()
@@ -52,10 +53,39 @@ router.get("/:id", async (req,res)=>{
     }
 })
 
-router.put("/", (req,res)=>{
+router.put("/:id", async (req,res)=>{
     const {id} = req.params
     if(!mongoose.Types.ObjectId.isValid(id)){
         return sendResponse(res, 404, null ,true, "Invalid ID!")
     }
+
+    try{
+        const {task, completed} = req.body
+        const taskForUpdate = await Task.findById(id)
+        const updatedTask = taskForUpdate
+        updatedTask.task = task
+        updatedTask.completed = completed
+        sendResponse(res, 200, updatedTask, false, "task updated successfully")
+        await updatedTask.save()
+    }catch{
+        sendResponse(res, 500, null, true, "somthing went wrong while updating task")
+    }
 } )
+
+
+router.delete("/:id", async (req,res)=>{
+    const {id} = req.params
+    if(!mongoose.Types.ObjectId.isValid(id)){
+        return sendResponse(res, 404, null, true, "Invalid ID")
+    }
+
+    try{
+        const taskForDelete = await Task.findById(id)
+        await Task.deleteOne(taskForDelete)
+        sendResponse(res, 200, null, false, "Data deleted Successfully!")
+    }catch{
+        sendResponse(res, 500, null, true, "Something went wrong while deleting!")
+    }
+})
+
 export default router
