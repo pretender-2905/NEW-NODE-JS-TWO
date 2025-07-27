@@ -1,7 +1,9 @@
-export default function sendResponse(res, status, data, error, msg){
+function sendResponse(res, status, data, error, msg){
     res.status(status).json({
-        error,
-        msg,
+        error: error,
         data: data,
-    });
+        msg: msg,
+    })
 }
+
+export default sendResponse

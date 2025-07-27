@@ -1,15 +1,15 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose'
 
-const { Schema } = mongoose;
+const {Schema} = mongoose;
 
-const taskSchema = new Schema(
+const newTask = new Schema(
     {
         task: String,
-        completed: { type: Boolean, default: false }
+        completed: {type: Boolean, default: false}
     },
-    { timestamps: true } //handle date
-);
+    
+    {timestamps: true}
+)
 
-const Task = mongoose.model("Tasks", taskSchema)
-
+const   Task = mongoose.model("Tasks", newTask)
 export default Task
