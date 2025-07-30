@@ -30,7 +30,7 @@
 
 
 import express from 'express'
-import  authenticateUser  from '../middleware/authentication.js';
+import { authenticateUser, authenticateAdmin } from '../middleware/authentication.js';
 import User from '../models/User.js'
 import sendResponse from '../helpers/sendResponse.js'
 const router = express.Router()
@@ -43,6 +43,17 @@ sendResponse(res, 200, user, false, "User Updated Successfully!")
 }catch(error){
 console.log("error from users.js  => ", error)
 sendResponse(res, 500, null, true, "Something went wrong!")
+}
+})
+
+
+router.get("/myInfo", authenticateUser, async (req,res)=>{
+try{
+const user = await User.findOne({_id : req.user._id})
+sendResponse(res, 200, user, false, "User Fetched Successfully!")
+}catch(error){
+console.log("error from users.js  => ", error)
+sendResponse(res, 500, null, true, "Something went wrong in users.js!")
 }
 })
 export default router

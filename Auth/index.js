@@ -3,16 +3,23 @@
 
 import express from 'express'
 import morgan from 'morgan'
-import 'dotenv/config' //ye MONGODBURI ko connect kry ga
+// import 'dotenv/config' //ye MONGODBURI ko connect kry ga
+import dotenv from 'dotenv';
+dotenv.config();
 import taskRoutes from './routers/tasks.js'
 import authRoutes from './routers/auth.js'
 import userRoutes from './routers/users.js'
+import courseRoutes from './routers/courses.js'
+
 const app = express()
-const PORT = 4000
+
 app.use(express.json())
 app.use(morgan('tiny'))
 import mongoose from 'mongoose'
 
+const PORT = process.env.PORT || 4000;
+const MONGO_URI = process.env.MONGO_URI || "mongodb://localhost:27017/mydb";
+const JWT_SECRET = process.env.JWT_SECRET || "defaultsecret";
 
 
 console.log("MONGODBURI", process.env.MONGODBURI)
@@ -32,4 +39,5 @@ app.get("/", (req,res)=>{
 app.use("/task", taskRoutes)
 app.use("/auth", authRoutes)
 app.use("/user", userRoutes)
+app.use("/course", courseRoutes)
 app.listen(PORT, ()=> console.log(`The server is running on ${PORT}`))

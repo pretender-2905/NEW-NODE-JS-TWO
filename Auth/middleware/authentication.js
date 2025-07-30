@@ -46,7 +46,7 @@
         import sendResponse from "../helpers/sendResponse.js"
         import User from "../models/User.js"
 
- async function  authenticateUser(req, res, next){
+export async function  authenticateUser(req, res, next){
 try{
 console.log("req.headers.authorization", req.headers.authorization)
 const bearerToken = req?.headers?.authorization
@@ -68,4 +68,26 @@ if (decoded) {
 return sendResponse(res, 500, null, true, "Something Went Wrong!")
 }
 }
-export default  authenticateUser
+
+
+
+
+
+
+export async function  authenticateAdmin(req, res, next){
+    const bearerToken = req.headers.authorization
+    if(!bearerToken) return sendResponse(res, 404, null, false, "Token not found!")
+   const token = bearerToken.split(" ")[1]
+
+    const decoded = jwt.verify(token, process.env.AUTH_SECRET)
+    req.user = decoded
+    if(decoded.role == "admin"){
+        next()
+    }else{
+        return sendResponse(res, 403, null, true, "ONLY ADMINS ARE ALLOWED TO ACCESS!" )
+    }
+    console.log("decoded=> ", decoded)
+    next()
+}
+
+
