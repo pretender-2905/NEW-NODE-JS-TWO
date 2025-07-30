@@ -6,7 +6,7 @@ import morgan from 'morgan'
 import 'dotenv/config' //ye MONGODBURI ko connect kry ga
 import taskRoutes from './routers/tasks.js'
 import authRoutes from './routers/auth.js'
-// import userRoutes from './routers/users.js'
+import userRoutes from './routers/users.js'
 const app = express()
 const PORT = 4000
 app.use(express.json())
@@ -31,5 +31,5 @@ app.get("/", (req,res)=>{
 
 app.use("/task", taskRoutes)
 app.use("/auth", authRoutes)
-// app.use("/user", userRoutes)
+app.use("/user", userRoutes)
 app.listen(PORT, ()=> console.log(`The server is running on ${PORT}`))

@@ -73,7 +73,7 @@ import jwt from 'jsonwebtoken';
 const registerSchema = Joi.object({
 email: Joi.string().email().required(),
 password: Joi.string().min(6).required(),
-fullName: Joi.string().alphanum().min(3),
+fullName: Joi.string().min(3),
 });
 
 const loginSchema = Joi.object({
@@ -113,6 +113,7 @@ if(!isPasswordValid) return sendResponse(res, 401, null, true, "Invalid Credenti
 const token = jwt.sign(user, process.env.AUTH_SECRET)
 console.log("token from login console=> ", token)
 sendResponse(res, 200, {user, token}, false, "User Login Successfully!")
+
 })
 
 
