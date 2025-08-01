@@ -86,8 +86,7 @@ export async function  authenticateAdmin(req, res, next){
     }else{
         return sendResponse(res, 403, null, true, "ONLY ADMINS ARE ALLOWED TO ACCESS!" )
     }
-    console.log("decoded=> ", decoded)
-    next()
+   
 }
 
 

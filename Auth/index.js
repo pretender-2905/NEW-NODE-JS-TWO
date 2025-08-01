@@ -10,12 +10,14 @@ import taskRoutes from './routers/tasks.js'
 import authRoutes from './routers/auth.js'
 import userRoutes from './routers/users.js'
 import courseRoutes from './routers/courses.js'
-
+import mongoose from 'mongoose'
+import cors from 'cors';
 const app = express()
 
 app.use(express.json())
 app.use(morgan('tiny'))
-import mongoose from 'mongoose'
+app.use(cors())
+
 
 const PORT = process.env.PORT || 4000;
 const MONGO_URI = process.env.MONGO_URI || "mongodb://localhost:27017/mydb";

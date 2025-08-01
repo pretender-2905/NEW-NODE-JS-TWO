@@ -19,7 +19,7 @@ router.get("/", authenticateUser, async (req, res) => {
 
 router.post("/", authenticateAdmin, async (req, res) => {
     try {
-        const course = new Course(req.body)
+       let course = new Course(req.body)
         course = await course.save()
         sendResponse(res, 201, course, false, "Courses added successflly")
     } catch (err) {

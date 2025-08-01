@@ -3,9 +3,9 @@ const {Schema} = mongoose
 
 const courseSchema = new Schema(
     {
-        "Title" : {type:String},
+        "title" : {type:String},
         "description": {type:String, default: ""},
-        "Thumbnail": {type: String} 
+        "thumbnail": {type: String} 
     }
 )
 
